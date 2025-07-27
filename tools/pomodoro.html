@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pomodoro</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Temporizador Pomodoro</h1>
+  <p id="timer">25:00</p>
+  <button onclick="startTimer()">Iniciar</button>
+  <button onclick="resetTimer()">Reiniciar</button>
+
+  <script>
+    let intervalo;
+    let minutosIniciales = 25;
+    let minutos = minutosIniciales;
+    let segundos = 0;
+
+    function updateDisplay() {
+      document.getElementById('timer').textContent =
+        `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      clearInterval(intervalo);
+      intervalo = setInterval(() => {
+        if (segundos === 0) {
+          if (minutos === 0) {
+            clearInterval(intervalo);
+            alert("¡Tiempo terminado!");
+            return;
+          }
+          minutos--;
+          segundos = 59;
+        } else {
+          segundos--;
+        }
+        updateDisplay();
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(intervalo);
+      minutos = minutosIniciales;
+      segundos = 0;
+      updateDisplay();
+    }
+
+    updateDisplay();
+  </script>
+</body>
+</html>

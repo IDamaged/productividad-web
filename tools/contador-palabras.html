@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contador de Palabras</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Contador de Palabras</h1>
+  <textarea id="texto" rows="10" style="width:100%"></textarea>
+  <p><strong>Palabras:</strong> <span id="palabras">0</span></p>
+  <p><strong>Caracteres:</strong> <span id="caracteres">0</span></p>
+  <script>
+    const texto = document.getElementById('texto');
+    texto.addEventListener('input', () => {
+      const contenido = texto.value.trim();
+      document.getElementById('palabras').textContent = contenido === '' ? 0 : contenido.split(/\s+/).length;
+      document.getElementById('caracteres').textContent = contenido.length;
+    });
+  </script>
+</body>
+</html>

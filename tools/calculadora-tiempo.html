@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Tiempo Trabajado</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Tiempo Trabajado</h1>
+  <label>Hora de entrada: <input type="time" id="entrada"></label>
+  <label>Hora de salida: <input type="time" id="salida"></label>
+  <button onclick="calcular()">Calcular</button>
+  <p id="resultado"></p>
+
+  <script>
+    function calcular() {
+      const entrada = document.getElementById('entrada').value;
+      const salida = document.getElementById('salida').value;
+      const resultado = document.getElementById('resultado');
+
+      if (!entrada || !salida) {
+        resultado.textContent = "Completa ambos campos.";
+        return;
+      }
+
+      const [h1, m1] = entrada.split(":").map(Number);
+      const [h2, m2] = salida.split(":").map(Number);
+
+      let minutosEntrada = h1 * 60 + m1;
+      let minutosSalida = h2 * 60 + m2;
+
+      if (minutosSalida < minutosEntrada) {
+        minutosSalida += 1440; // suma 24 horas si pasa de medianoche
+      }
+
+      const total = minutosSalida - minutosEntrada;
+      const horas = Math.floor(total / 60);
+      const minutos = total % 60;
+
+      resultado.textContent = `Tiempo total trabajado: ${horas} horas y ${minutos} minutos.`;
+    }
+  </script>
+</body>
+</html>
